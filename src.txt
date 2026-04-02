@@ -1,0 +1,146 @@
+<?php
+// db.php
+$host = 'localhost';
+$db   = 'comp1044_database';
+$user = 'root'; //
+$pass = '';     
+
+$dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
+}
+?>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Asset Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IT 资产管理系统</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.php">主页</a></li>
+                    <li><a href="employees.php">员工管理</a></li>
+                    <li><a href="#">资产管理 (待开发)</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h2>欢迎来到 IT 资产管理系统</h2>
+            <p>请使用上方导航栏管理员工和资产数据。</p>
+        </main>
+    </div>
+</body>
+</html>
+<?php
+require 'db.php';
+$message = '';
+
+// 处理表单提交 (插入新员工)
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $emp_id = trim($_POST['employee_id']);
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
+    $email = trim($_POST['email_address']);
+
+    // 表单验证: 确保必填字段不为空
+    if (empty($emp_id) || empty($first_name) || empty($last_name)) {
+        $message = "<p class='error'>错误: 员工ID、名字和姓氏为必填项。</p>";
+    } else {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO employees (employee_id, first_name, last_name, email_address) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$emp_id, $first_name, $last_name, $email]);
+            $message = "<p class='success'>员工添加成功！</p>";
+        } catch (PDOException $e) {
+            $message = "<p class='error'>添加失败: " . $e->getMessage() . "</p>";
+        }
+    }
+}
+
+// 获取所有员工数据
+$stmt = $pdo->query("SELECT * FROM employees");
+$employees = $stmt->fetchAll();
+?>
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>员工管理</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>员工管理</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.php">主页</a></li>
+                    <li><a href="employees.php">员工管理</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <?= $message ?>
+            
+            <section class="form-section">
+                <h3>添加新员工</h3>
+                <form action="employees.php" method="POST">
+                    <label for="employee_id">员工 ID (必填):</label>
+                    <input type="number" id="employee_id" name="employee_id" required>
+
+                    <label for="first_name">名字 (必填):</label>
+                    <input type="text" id="first_name" name="first_name" required>
+
+                    <label for="last_name">姓氏 (必填):</label>
+                    <input type="text" id="last_name" name="last_name" required>
+
+                    <label for="email_address">邮箱:</label>
+                    <input type="email" id="email_address" name="email_address">
+
+                    <button type="submit">添加员工</button>
+                </form>
+            </section>
+
+            <section class="table-section">
+                <h3>员工列表</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>员工 ID</th>
+                            <th>名字</th>
+                            <th>姓氏</th>
+                            <th>部门</th>
+                            <th>邮箱</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($employees as $emp): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($emp['employee_id']) ?></td>
+                            <td><?= htmlspecialchars($emp['first_name']) ?></td>
+                            <td><?= htmlspecialchars($emp['last_name']) ?></td>
+                            <td><?= htmlspecialchars($emp['department'] ?? '未分配') ?></td>
+                            <td><?= htmlspecialchars($emp['email_address']) ?></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
