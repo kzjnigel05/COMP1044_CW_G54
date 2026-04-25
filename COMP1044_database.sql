@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 23, 2026 at 08:30 AM
+-- Generation Time: Apr 25, 2026 at 09:46 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.1
 
@@ -82,7 +82,25 @@ INSERT INTO `activity_logs` (`log_id`, `user_id`, `action`, `details`, `created_
 (20, 1, 'Logout', 'User logged out', '2026-04-23 16:10:38'),
 (21, 2, 'Login', 'User logged in successfully', '2026-04-23 16:10:49'),
 (22, 2, 'Logout', 'User logged out', '2026-04-23 16:28:53'),
-(23, 1, 'Login', 'User logged in successfully', '2026-04-23 16:28:59');
+(23, 1, 'Login', 'User logged in successfully', '2026-04-23 16:28:59'),
+(24, 1, 'Login', 'User logged in successfully', '2026-04-25 16:02:19'),
+(25, 2, 'Login', 'User logged in successfully', '2026-04-25 17:35:13'),
+(26, 2, 'Assessment Submitted', 'Internship ID: 8 - Score: 11.00', '2026-04-25 17:35:31'),
+(27, 2, 'Logout', 'User logged out', '2026-04-25 17:38:01'),
+(28, 3, 'Login', 'User logged in successfully', '2026-04-25 17:38:11'),
+(29, 3, 'Logout', 'User logged out', '2026-04-25 17:42:39'),
+(30, 1, 'Login', 'User logged in successfully', '2026-04-25 17:42:45'),
+(31, NULL, 'Student Created', 'Student ID: 11 - hh', '2026-04-25 17:43:06'),
+(32, 1, 'Add Student', 'Added student: 11 - hh', '2026-04-25 17:43:06'),
+(33, 1, 'Add Assessor', 'Added assessor: efynk5 - HEIHEI', '2026-04-25 17:43:36'),
+(34, 1, 'Add Internship', 'Assigned student ID 10 to HOHO', '2026-04-25 17:43:59'),
+(35, 1, 'Update Assessor', 'Updated assessor: assessor - HEIHEI', '2026-04-25 17:44:28'),
+(36, 1, 'Logout', 'User logged out', '2026-04-25 17:44:31'),
+(37, 3, 'Login', 'User logged in successfully', '2026-04-25 17:45:08'),
+(38, 3, 'Logout', 'User logged out', '2026-04-25 17:45:11'),
+(39, 1, 'Login', 'User logged in successfully', '2026-04-25 17:45:16'),
+(40, 1, 'Logout', 'User logged out', '2026-04-25 17:45:32'),
+(41, 5, 'Login', 'User logged in successfully', '2026-04-25 17:45:40');
 
 -- --------------------------------------------------------
 
@@ -124,7 +142,8 @@ INSERT INTO `assessments` (`assessment_id`, `internship_id`, `undertaking_tasks`
 (1, 1, '85.00', '90.00', '80.00', '88.00', '85.00', '82.00', '86.00', '88.00', 'Excellent understanding of project requirements', 'Consistently followed safety protocols', 'Good application of theoretical knowledge', 'Well-structured and professional report', 'Clear and concise language throughout', 'Showed initiative in learning new technologies', 'Effectively managed project milestones', 'Good time management skills demonstrated', 'Outstanding performance overall. Keep up the excellent work!', 2, '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
 (2, 2, '78.00', '85.00', '75.00', '80.00', '82.00', '78.00', '75.00', '80.00', 'Good grasp of project tasks', 'Maintained good safety practices', 'Applied concepts adequately', 'Report could be more detailed', 'Generally clear communication', 'Active learner, sought additional knowledge', 'Room for improvement in planning', 'Managed time reasonably well', 'Good performance with areas for improvement.', 2, '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
 (3, 3, '92.00', '95.00', '88.00', '90.00', '92.00', '90.00', '88.00', '92.00', 'Exceptional work on all assigned tasks', 'Exemplary adherence to safety standards', 'Excellent integration of theory and practice', 'Outstanding report quality', 'Exceptional clarity in documentation', 'Proactive in continuous learning', 'Excellent project organization', 'Superior time management', 'Exceptional intern! Highly recommended for future opportunities.', 3, '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
-(4, 7, '50.00', '50.00', '50.00', '50.00', '50.00', '50.00', '50.00', '50.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 2, '2026-04-22 23:00:08', '2026-04-22 23:00:08');
+(4, 7, '50.00', '50.00', '50.00', '50.00', '50.00', '50.00', '50.00', '50.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 2, '2026-04-22 23:00:08', '2026-04-22 23:00:08'),
+(5, 8, '11.00', '11.00', '11.00', '11.00', '11.00', '11.00', '11.00', '11.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'aa', 2, '2026-04-25 17:35:31', '2026-04-25 17:35:31');
 
 --
 -- Triggers `assessments`
@@ -136,49 +155,6 @@ CREATE TRIGGER `tr_assessment_created` AFTER INSERT ON `assessments` FOR EACH RO
 END
 $$
 DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `asset_types`
---
-
-CREATE TABLE `asset_types` (
-  `asset_type_code` varchar(10) NOT NULL,
-  `asset_type_description` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employees`
---
-
-CREATE TABLE `employees` (
-  `employee_id` int(11) NOT NULL,
-  `first_name` varchar(50) DEFAULT NULL,
-  `last_name` varchar(50) DEFAULT NULL,
-  `department` varchar(100) DEFAULT NULL,
-  `extension` varchar(10) DEFAULT NULL,
-  `email_address` varchar(100) DEFAULT NULL,
-  `other_details` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employee_assets`
---
-
-CREATE TABLE `employee_assets` (
-  `asset_id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `date_out` date NOT NULL,
-  `date_returned` date DEFAULT NULL,
-  `condition_out` varchar(100) DEFAULT NULL,
-  `condition_returned` varchar(100) DEFAULT NULL,
-  `other_details` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -209,35 +185,8 @@ INSERT INTO `internships` (`internship_id`, `student_id`, `assessor_id`, `compan
 (5, 5, 4, 'Cybersecurity Solutions', '2025-07-01', '2025-09-30', '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
 (6, 6, 4, 'DataTech Malaysia', '2025-06-15', '2025-09-15', '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
 (7, 7, 2, 'Mobile Apps Studio', '2025-06-01', '2025-08-31', '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
-(8, 8, 2, 'bla bla company', '2026-04-24', '2026-07-24', '2026-04-23 16:02:08', '2026-04-23 16:02:08');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `it_assets`
---
-
-CREATE TABLE `it_assets` (
-  `asset_id` int(11) NOT NULL,
-  `asset_type_code` varchar(50) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `other_details` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `it_asset_inventory`
---
-
-CREATE TABLE `it_asset_inventory` (
-  `it_asset_inventory_id` int(11) NOT NULL,
-  `asset_id` int(11) DEFAULT NULL,
-  `inventory_date` date DEFAULT NULL,
-  `number_assigned` int(11) DEFAULT NULL,
-  `number_in_stock` int(11) DEFAULT NULL,
-  `other_details` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(8, 8, 2, 'bla bla company', '2026-04-24', '2026-07-24', '2026-04-23 16:02:08', '2026-04-23 16:02:08'),
+(9, 10, 5, 'HOHO', '2026-04-26', '2026-04-26', '2026-04-25 17:43:59', '2026-04-25 17:43:59');
 
 -- --------------------------------------------------------
 
@@ -313,7 +262,8 @@ INSERT INTO `students` (`id`, `student_id`, `student_name`, `programme`, `email`
 (6, 'IT2021001', 'Sophia Martinez', 'Information Technology', 'sophia.m@student.edu', '+60123456794', 1, '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
 (7, 'IT2021002', 'James Wilson', 'Information Technology', 'james.w@student.edu', '+60123456795', 1, '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
 (8, 'CS2021004', 'Olivia Anderson', 'Computer Science', 'olivia.a@student.edu', '+60123456796', 1, '2026-04-22 16:56:34', '2026-04-22 16:56:34'),
-(9, '20713102', 'Tresa', 'Computer Science', 'jongjunjiet@gmail.com', '0123456789', 1, '2026-04-23 16:09:44', '2026-04-23 16:09:44');
+(9, '20713102', 'Tresa', 'Computer Science', 'jongjunjiet@gmail.com', '0123456789', 1, '2026-04-23 16:09:44', '2026-04-23 16:09:44'),
+(10, '11', 'hh', 'cs', 'kzjnigel@gmail.com', '1234567890', 1, '2026-04-25 17:43:06', '2026-04-25 17:43:06');
 
 --
 -- Triggers `students`
@@ -352,21 +302,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `full_name`, `email`, `r
 (1, 'admin', '$2y$10$/cNiu5RcKPr9C0JyF73lFe8YPSdUoMoLZW5bUHxsfdklTow.073c2', 'System Administrator', 'admin@university.edu', 'Admin', 1, '2026-04-22 16:56:34', '2026-04-22 21:28:48'),
 (2, 'assessor1', '$2y$10$UWWKjWd8CD/Qm052uZ7gSO4DK3vsOaOjDUfqCBJXVrXaygewZ8.z6', 'Dr. Sarah Johnson', 'sarah.j@university.edu', 'Assessor', 1, '2026-04-22 16:56:34', '2026-04-22 22:41:16'),
 (3, 'assessor2', '$2y$10$Led5dITNXeESXXkugmIMKenoxV0ZaMNjr4t0C1c5by8OP0sH9F1NW', 'Prof. Michael Chen', 'michael.c@university.edu', 'Assessor', 1, '2026-04-22 16:56:34', '2026-04-22 22:41:25'),
-(4, 'assessor3', '$2y$10$ycDGf0/k4iylDj/oAFHBf.f7cSgdctrxZpHESVkDiOJnp2tmcmMaS', 'Dr. Emily Roberts', 'emily.r@university.edu', 'Assessor', 1, '2026-04-22 16:56:34', '2026-04-22 22:41:09');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `vw_assessor_workload`
--- (See below for the actual view)
---
-CREATE TABLE `vw_assessor_workload` (
-`user_id` int(11)
-,`assessor_name` varchar(100)
-,`total_students` bigint(21)
-,`completed_assessments` bigint(21)
-,`pending_assessments` bigint(22)
-);
+(4, 'assessor3', '$2y$10$ycDGf0/k4iylDj/oAFHBf.f7cSgdctrxZpHESVkDiOJnp2tmcmMaS', 'Dr. Emily Roberts', 'emily.r@university.edu', 'Assessor', 1, '2026-04-22 16:56:34', '2026-04-22 22:41:09'),
+(5, 'assessor', '$2y$10$XSKCem/RoGyg6H4pun9lLeNNok2y164jX1JL3WnTinQiGSWpHXnSy', 'HEIHEI', 'kzjnigel@gmail.com', 'Assessor', 1, '2026-04-25 17:43:36', '2026-04-25 17:44:28');
 
 -- --------------------------------------------------------
 
@@ -384,15 +321,6 @@ CREATE TABLE `vw_student_results` (
 ,`assessed_at` datetime
 ,`grade` varchar(12)
 );
-
--- --------------------------------------------------------
-
---
--- Structure for view `vw_assessor_workload`
---
-DROP TABLE IF EXISTS `vw_assessor_workload`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_assessor_workload`  AS SELECT `u`.`user_id` AS `user_id`, `u`.`full_name` AS `assessor_name`, count(`i`.`internship_id`) AS `total_students`, count(`a`.`assessment_id`) AS `completed_assessments`, (count(`i`.`internship_id`) - count(`a`.`assessment_id`)) AS `pending_assessments` FROM ((`users` `u` left join `internships` `i` on((`u`.`user_id` = `i`.`assessor_id`))) left join `assessments` `a` on((`i`.`internship_id` = `a`.`internship_id`))) WHERE ((`u`.`role` = 'Assessor') AND (`u`.`is_active` = 1)) GROUP BY `u`.`user_id`, `u`.`full_name``full_name`  ;
 
 -- --------------------------------------------------------
 
@@ -426,45 +354,12 @@ ALTER TABLE `assessments`
   ADD KEY `idx_final_score` (`final_score`);
 
 --
--- Indexes for table `asset_types`
---
-ALTER TABLE `asset_types`
-  ADD PRIMARY KEY (`asset_type_code`);
-
---
--- Indexes for table `employees`
---
-ALTER TABLE `employees`
-  ADD PRIMARY KEY (`employee_id`);
-
---
--- Indexes for table `employee_assets`
---
-ALTER TABLE `employee_assets`
-  ADD PRIMARY KEY (`asset_id`,`employee_id`,`date_out`),
-  ADD KEY `employee_id` (`employee_id`);
-
---
 -- Indexes for table `internships`
 --
 ALTER TABLE `internships`
   ADD PRIMARY KEY (`internship_id`),
   ADD KEY `idx_student` (`student_id`),
   ADD KEY `idx_assessor` (`assessor_id`);
-
---
--- Indexes for table `it_assets`
---
-ALTER TABLE `it_assets`
-  ADD PRIMARY KEY (`asset_id`),
-  ADD KEY `asset_type_code` (`asset_type_code`);
-
---
--- Indexes for table `it_asset_inventory`
---
-ALTER TABLE `it_asset_inventory`
-  ADD PRIMARY KEY (`it_asset_inventory_id`),
-  ADD KEY `asset_id` (`asset_id`);
 
 --
 -- Indexes for table `login_attempts`
@@ -502,19 +397,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `activity_logs`
 --
 ALTER TABLE `activity_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `assessments`
 --
 ALTER TABLE `assessments`
-  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `assessment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `internships`
 --
 ALTER TABLE `internships`
-  MODIFY `internship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `internship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `login_attempts`
@@ -526,13 +421,13 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -543,39 +438,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `activity_logs`
   ADD CONSTRAINT `activity_logs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Constraints for table `assessments`
---
-ALTER TABLE `assessments`
-  ADD CONSTRAINT `assessments_ibfk_1` FOREIGN KEY (`internship_id`) REFERENCES `internships` (`internship_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `assessments_ibfk_2` FOREIGN KEY (`assessed_by`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `employee_assets`
---
-ALTER TABLE `employee_assets`
-  ADD CONSTRAINT `employee_assets_ibfk_1` FOREIGN KEY (`asset_id`) REFERENCES `it_assets` (`asset_id`),
-  ADD CONSTRAINT `employee_assets_ibfk_2` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`);
-
---
--- Constraints for table `internships`
---
-ALTER TABLE `internships`
-  ADD CONSTRAINT `internships_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `internships_ibfk_2` FOREIGN KEY (`assessor_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `it_assets`
---
-ALTER TABLE `it_assets`
-  ADD CONSTRAINT `it_assets_ibfk_1` FOREIGN KEY (`asset_type_code`) REFERENCES `asset_types` (`asset_type_code`);
-
---
--- Constraints for table `it_asset_inventory`
---
-ALTER TABLE `it_asset_inventory`
-  ADD CONSTRAINT `it_asset_inventory_ibfk_1` FOREIGN KEY (`asset_id`) REFERENCES `it_assets` (`asset_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
